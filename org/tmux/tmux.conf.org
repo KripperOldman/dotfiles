@@ -1,0 +1,43 @@
+#+TITLE: Tmux Configuration
+#+PROPERTY: header-args:conf :tangle ../../config/tmux/tmux.conf :mkdirp yes :comments org
+#+OPTIONS: ^:{}
+* Change Prefix
+#+begin_src conf
+  set -g prefix C-a
+  unbind C-b
+#+end_src
+* Add Mouse Support
+#+begin_src conf
+  set -g mouse on
+#+end_src
+* Better Vi Copy Mode Bindings
+#+begin_src conf
+  bind-key -T copy-mode-vi 'v' send -X begin-selection
+  bind-key -T copy-mode-vi 'y' send -X copy-selection-and-cancel
+#+end_src
+* Install Plugins
+Other examples:
+  - set -g @plugin 'github_username/plugin_name'
+  - set -g @plugin 'git@github.com:user/plugin'
+  - set -g @plugin 'git@bitbucket.com:user/plugin'
+** Plugin Manager
+#+begin_src conf
+  set -g @plugin 'tmux-plugins/tpm'
+#+end_src
+** Gruvbox
+#+begin_src conf
+  set -g @plugin 'egel/tmux-gruvbox'
+  set -g @tmux-gruvbox 'dark' # or 'light'
+  #+end_src
+** Other Plugins
+#+begin_src conf
+  set -g @plugin 'tmux-plugins/tmux-sensible'
+  set -g @plugin 'tmux-plugins/tmux-pain-control'
+#+end_src
+* Initialize TMUX plugin manager
+keep this line at the very bottom of tmux.conf
+#+begin_src conf
+  set-environment -g PATH "/usr/local/bin:/bin:/usr/bin"
+  set-window-option -g mode-keys vi
+  run '~/.tmux/plugins/tpm/tpm'
+#+end_src
