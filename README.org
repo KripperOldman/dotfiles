@@ -2,7 +2,8 @@
 
 * About
 These are my dotfiles for:
-- [[file:i3-config.org][i3 Window Manager]] 
+- [[file:org/i3/config.org][i3 Window Manager]]
+- [[file:org/picom.conf.org][Picom]]
 
 * Installation
 #+begin_src shell
