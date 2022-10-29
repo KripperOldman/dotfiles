@@ -1,0 +1,769 @@
+# Mod Keys
+# Set mod key (Mod1=<Alt>, Mod4=<Super>)
+
+
+set $mod Mod4
+set $modv Mod1
+
+
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+
+
+floating_modifier $mod
+
+# Horizontal Monitor
+
+
+set $wsh1 1:H1
+
+set $wsh2 2:H2
+
+set $wsh3 3:H3
+
+set $wsh4 4:H4
+
+set $wsh5 5:H5
+
+set $wsh6 6:H6
+
+set $wsh7 7:H7
+
+set $wsh8 8:H8
+
+set $wsh9 9:H9
+
+set $wsh10 10:H10
+
+# Vertical Monitor
+
+
+set $wsv1 1:V1
+
+set $wsv2 2:V2
+
+set $wsv3 3:V3
+
+set $wsv4 4:V4
+
+set $wsv5 5:V5
+
+set $wsv6 6:V6
+
+set $wsv7 7:V7
+
+set $wsv8 8:V8
+
+set $wsv9 9:V9
+
+set $wsv10 10:V10
+
+# Displays
+
+set $horizontal_screen "HDMI-0"
+set $vertical_screen "DP-1"
+
+# Horizontal Monitor
+
+workspace $wsh1 output $horizontal_screen
+
+workspace $wsh2 output $horizontal_screen
+
+workspace $wsh3 output $horizontal_screen
+
+workspace $wsh4 output $horizontal_screen
+
+workspace $wsh5 output $horizontal_screen
+
+workspace $wsh6 output $horizontal_screen
+
+workspace $wsh7 output $horizontal_screen
+
+workspace $wsh8 output $horizontal_screen
+
+workspace $wsh9 output $horizontal_screen
+
+workspace $wsh10 output $horizontal_screen
+
+# Vertical Monitor
+
+workspace $wsv1 output $vertical_screen
+
+workspace $wsv2 output $vertical_screen
+
+workspace $wsv3 output $vertical_screen
+
+workspace $wsv4 output $vertical_screen
+
+workspace $wsv5 output $vertical_screen
+
+workspace $wsv6 output $vertical_screen
+
+workspace $wsv7 output $vertical_screen
+
+workspace $wsv8 output $vertical_screen
+
+workspace $wsv9 output $vertical_screen
+
+workspace $wsv10 output $vertical_screen
+
+# Open Applications on Specific Workspaces
+
+
+assign [class="Webcord"] $wsv6
+#assign [class="firefox"] $ws2
+
+# Because Spotify is Weird for Whatever Reason
+
+
+for_window [class="Spotify"] move to workspace $wsv6
+
+# Open Specific Applications in Floating Mode
+
+
+for_window [title="alsamixer"] floating enable border pixel 1
+
+  for_window [class="calamares"] floating enable border normal
+
+  for_window [class="Clipgrab"] floating enable
+
+  for_window [title="File Transfer*"] floating enable
+
+  for_window [class="Galculator"] floating enable border pixel 1
+
+  for_window [class="GParted"] floating enable border normal
+
+  for_window [title="i3_help"] floating enable sticky enable border normal
+
+  for_window [class="Lightdm-settings"] floating enable
+
+  for_window [class="Lxappearance"] floating enable sticky enable border normal
+
+  for_window [class="Manjaro-hello"] floating enable
+
+  for_window [class="Manjaro Settings Manager"] floating enable border normal
+
+  for_window [title="MuseScore: Play Panel"] floating enable
+
+  for_window [class="Nitrogen"] floating enable sticky enable border normal
+
+  for_window [class="Oblogout"] fullscreen enable
+
+  for_window [class="octopi"] floating enable
+
+  for_window [title="About Pale Moon"] floating enable
+
+  for_window [class="Pamac-manager"] floating enable
+
+  for_window [class="Pavucontrol"] floating enable
+
+  for_window [class="qt5ct"] floating enable sticky enable border normal
+
+  for_window [class="Qtconfig-qt4"] floating enable sticky enable border normal
+
+  for_window [class="Simple-scan"] floating enable border normal
+
+  for_window [class="(?i)System-config-printer.py"] floating enable border normal
+
+  for_window [class="Skype"] floating enable border normal
+
+  for_window [class="Timeset-gui"] floating enable border normal
+
+  for_window [class="(?i)virtualbox"] floating enable border normal
+
+  for_window [class="Xfburn"] floating enable
+
+  for_window [title="Variety Images"] floating enable
+
+# Switch to Workspace with Urgent Window Automatically
+
+
+for_window [urgent=latest] focus
+
+# Kill windows
+# Kill focused window
+
+bindsym $mod+Shift+q kill
+
+
+
+# Start xkill (force closes selected application)
+
+bindsym $mod+Ctrl+x --release exec --no-startup-id xkill
+
+# Change borders
+
+
+bindsym $mod+u border none
+
+bindsym $mod+y border pixel 2
+
+bindsym $mod+n border normal
+
+# Change Focus
+
+bindsym $mod+h focus left
+
+bindsym $mod+j focus down
+
+bindsym $mod+k focus up
+
+bindsym $mod+l focus right
+
+
+
+# alternatively, you can use the cursor keys:
+
+
+bindsym $mod+Left focus left
+
+bindsym $mod+Down focus down
+
+bindsym $mod+Up focus up
+
+bindsym $mod+Right focus right
+
+# Move Windows
+# move focused window
+
+
+bindsym $mod+Shift+h move left
+
+bindsym $mod+Shift+j move down
+
+bindsym $mod+Shift+k move up
+
+bindsym $mod+Shift+l move right
+
+
+
+# alternatively, you can use the cursor keys:
+
+
+bindsym $mod+Shift+Left move left
+
+bindsym $mod+Shift+Down move down
+
+bindsym $mod+Shift+Up move up
+
+bindsym $mod+Shift+Right move right
+
+
+
+# workspace back and forth (with/without active container)
+
+
+workspace_auto_back_and_forth yes
+
+bindsym $mod+b workspace back_and_forth
+
+bindsym $mod+Shift+b move container to workspace back_and_forth; workspace back_and_forth
+
+
+# focus the parent container
+
+
+bindsym $mod+a focus parent
+
+
+
+# move the currently focused window to the scratchpad
+
+
+bindsym $mod+Shift+minus move scratchpad
+
+
+
+# Show the next scratchpad window or hide the focused scratchpad window.
+
+# If there are multiple scratchpad windows, this command cycles through them.
+
+
+bindsym $mod+minus scratchpad show
+
+
+
+# navigate workspaces next / previous
+
+
+bindsym $mod+Ctrl+Right workspace next
+
+bindsym $mod+Ctrl+Left workspace prev
+
+# Horizontal Monitor
+
+bindsym $mod+1 workspace $wsh1
+
+bindsym $mod+2 workspace $wsh2
+
+bindsym $mod+3 workspace $wsh3
+
+bindsym $mod+4 workspace $wsh4
+
+bindsym $mod+5 workspace $wsh5
+
+bindsym $mod+6 workspace $wsh6
+
+bindsym $mod+7 workspace $wsh7
+
+bindsym $mod+8 workspace $wsh8
+
+bindsym $mod+9 workspace $wsh9
+
+bindsym $mod+0 workspace $wsh10
+
+# Vertical Monitor
+
+
+bindsym $modv+1 workspace $wsv1
+
+bindsym $modv+2 workspace $wsv2
+
+bindsym $modv+3 workspace $wsv3
+
+bindsym $modv+4 workspace $wsv4
+
+bindsym $modv+5 workspace $wsv5
+
+bindsym $modv+6 workspace $wsv6
+
+bindsym $modv+7 workspace $wsv7
+
+bindsym $modv+8 workspace $wsv8
+
+bindsym $modv+9 workspace $wsv9
+
+bindsym $modv+0 workspace $wsv10
+
+# Horizontal Monitor
+# Move focused container to workspace
+
+
+bindsym $mod+Ctrl+1 move container to workspace $wsh1
+
+bindsym $mod+Ctrl+2 move container to workspace $wsh2
+
+bindsym $mod+Ctrl+3 move container to workspace $wsh3
+
+bindsym $mod+Ctrl+4 move container to workspace $wsh4
+
+bindsym $mod+Ctrl+5 move container to workspace $wsh5
+
+bindsym $mod+Ctrl+6 move container to workspace $wsh6
+
+bindsym $mod+Ctrl+7 move container to workspace $wsh7
+
+bindsym $mod+Ctrl+8 move container to workspace $wsh8
+
+bindsym $mod+Ctrl+9 move container to workspace $wsh9
+
+bindsym $mod+Ctrl+0 move container to workspace $wsh10
+
+
+
+# Move to workspace with focused container (follow container)
+
+
+bindsym $mod+Shift+1 move container to workspace $wsh1; workspace $wsh1
+
+bindsym $mod+Shift+2 move container to workspace $wsh2; workspace $wsh2
+
+bindsym $mod+Shift+3 move container to workspace $wsh3; workspace $wsh3
+
+bindsym $mod+Shift+4 move container to workspace $wsh4; workspace $wsh4
+
+bindsym $mod+Shift+5 move container to workspace $wsh5; workspace $wsh5
+
+bindsym $mod+Shift+6 move container to workspace $wsh6; workspace $wsh6
+
+bindsym $mod+Shift+7 move container to workspace $wsh7; workspace $wsh7
+
+bindsym $mod+Shift+8 move container to workspace $wsh8; workspace $wsh8
+
+bindsym $mod+Shift+9 move container to workspace $wsh9; workspace $wsh9
+
+bindsym $mod+Shift+0 move container to workspace $wsh10; workspace $wsh10
+
+# Vertical Monitor
+# Move focused container to workspace
+
+
+bindsym $modv+Ctrl+1 move container to workspace $wsv1
+
+bindsym $modv+Ctrl+2 move container to workspace $wsv2
+
+bindsym $modv+Ctrl+3 move container to workspace $wsv3
+
+bindsym $modv+Ctrl+4 move container to workspace $wsv4
+
+bindsym $modv+Ctrl+5 move container to workspace $wsv5
+
+bindsym $modv+Ctrl+6 move container to workspace $wsv6
+
+bindsym $modv+Ctrl+7 move container to workspace $wsv7
+
+bindsym $modv+Ctrl+8 move container to workspace $wsv8
+
+bindsym $modv+Ctrl+9 move container to workspace $wsv9
+
+bindsym $modv+Ctrl+0 move container to workspace $wsv10
+
+
+
+# Move to workspace with focused container (follow container)
+
+
+bindsym $modv+Shift+1 move container to workspace $wsv1; workspace $wsv1
+
+bindsym $modv+Shift+2 move container to workspace $wsv2; workspace $wsv2
+
+bindsym $modv+Shift+3 move container to workspace $wsv3; workspace $wsv3
+
+bindsym $modv+Shift+4 move container to workspace $wsv4; workspace $wsv4
+
+bindsym $modv+Shift+5 move container to workspace $wsv5; workspace $wsv5
+
+bindsym $modv+Shift+6 move container to workspace $wsv6; workspace $wsv6
+
+bindsym $modv+Shift+7 move container to workspace $wsv7; workspace $wsv7
+
+bindsym $modv+Shift+8 move container to workspace $wsv8; workspace $wsv8
+
+bindsym $modv+Shift+9 move container to workspace $wsv9; workspace $wsv9
+
+bindsym $modv+Shift+0 move container to workspace $wsv10; workspace $wsv10
+
+# Move Containers between Monitors
+
+bindsym $mod+Ctrl+greater move container to output right
+bindsym $mod+Ctrl+less move container to output left
+
+# Workspace Layout
+# split orientation
+
+
+bindsym $mod+Tab split toggle
+
+
+
+# toggle fullscreen mode for the focused container
+
+
+bindsym $mod+f fullscreen toggle
+
+
+
+# change container layout (stacked, tabbed, toggle split)
+
+
+bindsym $mod+s layout stacking
+
+bindsym $mod+t layout tabbed
+
+bindsym $mod+q layout toggle split
+
+# Floating
+# toggle tiling / floating
+
+
+bindsym $mod+Shift+space floating toggle
+
+
+
+# change focus between tiling / floating windows
+
+
+bindsym $mod+space focus mode_toggle
+
+
+
+# toggle sticky
+
+
+bindsym $mod+Shift+s sticky toggle
+
+# Program launcher
+
+
+bindsym $mod+d exec --no-startup-id $HOME/.config/polybar/scripts/launcher.sh
+
+# Power Menu
+
+
+bindsym $mod+Shift+e exec --no-startup-id $HOME/.config/polybar/scripts/powermenu.sh
+
+# Network Menu
+
+bindsym $mod+Shift+n exec --no-startup-id networkmanager_dmenu -theme $HOME/.config/polybar/scripts/rofi/networkmenu.rasi
+
+# Binding Media Keys
+
+bindsym XF86AudioNext exec --no-startup-id "playerctl next"
+bindsym XF86AudioPrev exec --no-startup-id "playerctl previous"
+bindsym XF86AudioPlay exec --no-startup-id "playerctl play-pause"
+
+bindsym XF86AudioStop exec --no-startup-id "playerctl --all-players pause"
+bindsym XF86AudioMute exec --no-startup-id $HOME/.scripts/volume mute
+bindsym XF86AudioLowerVolume exec --no-startup-id $HOME/.scripts/volume down
+bindsym XF86AudioRaiseVolume exec --no-startup-id $HOME/.scripts/volume up
+
+# General Applications
+
+bindsym $mod+Return exec --no-startup-id kitty tmux new -A -s main
+
+bindsym $mod+w exec --no-startup-id firefox
+
+bindsym $mod+e exec --no-startup-id kitty ranger
+
+bindsym $mod+Shift+p exec --no-startup-id flameshot gui
+
+bindsym $mod+c exec --no-startup-id emacsclient -c --alternate-editor=
+
+focus_follows_mouse no
+
+# Reload the Configuration File
+
+
+bindsym $mod+Shift+c reload
+
+# Restart i3 Inplace (preserves your layout/session, can be used to upgrade i3)
+
+
+bindsym $mod+Shift+r restart
+
+# Enter Resize Mode
+
+
+bindsym $mod+r mode "resize"
+
+# Using Resize Mode
+# These bindings trigger as soon as you enter the resize mode
+
+# Pressing left will shrink the window’s width.
+
+# Pressing right will grow the window’s width.
+
+# Pressing up will shrink the window’s height.
+
+# Pressing down will grow the window’s height.
+
+
+mode "resize" {
+
+bindsym h           resize shrink width 10 px or 10 ppt
+
+bindsym j           resize grow height 10 px or 10 ppt
+
+bindsym k           resize shrink height 10 px or 10 ppt
+
+bindsym l           resize grow width 10 px or 10 ppt
+
+
+
+# same bindings, but for the arrow keys
+
+
+bindsym Left        resize shrink width 10 px or 10 ppt
+
+bindsym Down        resize grow height 10 px or 10 ppt
+
+bindsym Up          resize shrink height 10 px or 10 ppt
+
+bindsym Right       resize grow width 10 px or 10 ppt
+
+
+
+# back to normal: Enter or Escape
+
+
+bindsym Return mode "default"
+
+bindsym Escape mode "default"
+
+}
+
+# Setup
+
+set $mode_gaps Gaps: (o) outer, (i) inner
+
+set $mode_gaps_outer Outer Gaps: +|-|0 (local), Shift + +|-|0 (global)
+
+set $mode_gaps_inner Inner Gaps: +|-|0 (local), Shift + +|-|0 (global)
+
+# Entering Gaps Mode
+
+bindsym $mod+Shift+g mode "$mode_gaps"
+
+# Using Gaps Mode
+
+mode "$mode_gaps" {
+
+bindsym o      mode "$mode_gaps_outer"
+
+bindsym i      mode "$mode_gaps_inner"
+
+bindsym Return mode "default"
+
+bindsym Escape mode "default"
+
+}
+
+# Inner Gaps Mode
+
+mode "$mode_gaps_inner" {
+
+bindsym plus  gaps inner current plus 5
+
+bindsym minus gaps inner current minus 5
+
+bindsym 0     gaps inner current set 0
+
+bindsym Shift+plus  gaps inner all plus 5
+
+bindsym Shift+minus gaps inner all minus 5
+
+bindsym Shift+0     gaps inner all set 0
+
+bindsym Return mode "default"
+
+bindsym Escape mode "default"
+
+}
+
+# Outer Gaps Mode
+
+mode "$mode_gaps_outer" {
+
+bindsym plus  gaps outer current plus 5
+
+bindsym minus gaps outer current minus 5
+
+bindsym 0     gaps outer current set 0
+
+bindsym Shift+plus  gaps outer all plus 5
+
+bindsym Shift+minus gaps outer all minus 5
+
+bindsym Shift+0     gaps outer all set 0
+
+bindsym Return mode "default"
+
+bindsym Escape mode "default"
+
+}
+
+# Set Caps Lock to ESC
+# Set caps lock to escape
+
+
+exec_always --no-startup-id setxkbmap -layout us -option caps:escape
+
+# Wallpaper
+
+
+exec_always --no-startup-id nitrogen --set-zoom-fill --save $HOME/Pictures/dual_wallpapers/gruvbox_astronaut_pink.jpeg
+
+# exec --no-startup-id variety
+# bindsym $mod+XF86AudioNext exec --no-startup-id variety --next
+# bindsym $mod+XF86AudioPrev exec --no-startup-id variety --previous
+# bindsym $mod+XF86AudioPlay exec --no-startup-id variety --toggle-pause
+
+# Picom
+
+
+exec_always --no-startup-id picom -bc
+
+# Polybar
+
+
+exec_always --no-startup-id $HOME/.config/polybar/launch.sh
+
+exec --no-startup-id nm-applet
+
+exec --no-startup-id pa-applet
+
+exec --no-startup-id blueman-applet
+
+# Audio EQ
+
+exec_always --no-startup-id easyeffects --gapplication-service
+
+# Startup VPN
+
+exec_always --no-startup-id mullvad connect
+
+# Other Applications
+
+exec --no-startup-id flameshot
+
+exec --no-startup-id webcord
+
+exec --no-startup-id spotify
+
+# Gaps
+# Set inner/outer gaps
+
+# gaps inner|outer current|all set|plus|minus <px>
+
+
+gaps inner 16
+
+gaps outer 18
+
+
+
+# Additionally, you can issue commands with the following syntax. This is useful to bind keys to changing the gap size.
+
+# Smart gaps (gaps used if only more than one container on the workspace)
+
+
+# smart_gaps on
+
+
+
+# Smart borders (draw borders around container only if it is not the only container on this workspace) 
+
+# on|no_gaps (on=always activate and no_gaps=only activate if the gap size to the edge of the screen is 0)
+
+
+smart_borders no_gaps
+
+# Border Styles
+# Configure border style <normal|1pixel|pixel xx|none|pixel>
+
+
+new_window pixel 2
+new_float pixel 2
+for_window [all] border pixel 2
+
+
+
+# Hide borders
+
+
+hide_edge_borders none
+
+# Colorscheme
+
+# Gruvbox colorscheme 
+# | class                     | border    | bground   | text      | indicator | child_border |
+# |---------------------------+-----------+-----------+-----------+-----------+--------------|
+# | =client.focused=          | =#d65d0e= | =#d65d0e= | =#fbf1c7= | =#b16286= | =#7c6f64=    |
+# | =client.focused_inactive= | =#d65d0e= | =#d65d0e= | =#fbf1c7= | =#504945= | =#504945=    |
+# | =client.unfocused=        | =#3c3836= | =#3c3836= | =#ebdbb2= | =#3c3836= | =#3c3836=    |
+# | =client.urgent=           | =#cc241d= | =#cc241d= | =#ebdbb2= | =#cc241d= | =#cc241d=    |
+# | =client.placeholder=      | =#282828= | =#282828= | =#ebdbb2= | =#282828= | =#282828=    |
+# | =client.background=       | =#282828= |           |           |           |              |
+
+
+client.focused          #d65d0e #d65d0e #fbf1c7 #b16286   #7c6f64
+client.focused_inactive #d65d0e #d65d0e #fbf1c7 #504945   #504945
+client.unfocused        #3c3836 #3c3836 #ebdbb2 #3c3836   #3c3836
+client.urgent           #cc241d #cc241d #ebdbb2 #cc241d   #cc241d
+client.placeholder      #282828 #282828 #ebdbb2 #282828   #282828
+client.background       #282828
+
+# Font Styles
+
+font pango:Quicksand Medium, Montserrat 12
+title_align center

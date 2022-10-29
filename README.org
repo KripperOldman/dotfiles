@@ -1,0 +1,10 @@
+#+TITLE: Dotfiles
+
+* About
+These are my dotfiles for:
+-[[file:i3-config.org][i3 Window Manager]] 
+
+* Installation
+#+begin_src shell
+  cp -r config/* $HOME/.config
+#+end_src
