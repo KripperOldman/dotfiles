@@ -4,6 +4,7 @@
 These are my dotfiles for:
 - [[file:org/i3/config.org][i3 Window Manager]]
 - [[file:org/picom.conf.org][Picom]]
+- [[file:org/tmux/tmux.conf.org][Tmux]]
 
 * Installation
 #+begin_src shell
