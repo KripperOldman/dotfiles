@@ -97,7 +97,7 @@ set $ws1 1:mail
 * Window Setup
 ** Open Applications on Specific Workspaces
 #+begin_src conf
-  assign [class="Webcord"] $wsv6
+  assign [class="discord"] $wsv6
   #assign [class="firefox"] $ws2
 #+end_src
 *** Because Spotify is Weird for Whatever Reason
@@ -338,6 +338,10 @@ toggle sticky
 #+begin_src conf
   bindsym $mod+Shift+n exec --no-startup-id networkmanager_dmenu -theme $HOME/.config/polybar/scripts/rofi/networkmenu.rasi
 #+end_src
+** Binding Numlock
+#+begin_src conf
+  bindsym --release Num_Lock exec --no-startup-id $HOME/.scripts/sync-numlock
+#+end_src
 ** Binding Media Keys
 #+begin_src conf
   bindsym XF86AudioNext exec --no-startup-id "playerctl next"
@@ -352,7 +356,7 @@ toggle sticky
 ** General Applications
 #+begin_src conf
   bindsym $mod+Return exec --no-startup-id kitty tmux new -A -s main
-  bindsym $mod+w exec --no-startup-id firefox
+  bindsym $mod+w exec --no-startup-id firefox-developer-edition
   bindsym $mod+e exec --no-startup-id kitty ranger
   bindsym $mod+Shift+p exec --no-startup-id flameshot gui
   bindsym $mod+c exec --no-startup-id emacsclient -c --alternate-editor=
@@ -449,6 +453,14 @@ Set caps lock to escape
 #+begin_src conf
   exec_always --no-startup-id setxkbmap -layout us -option caps:escape
 #+end_src
+** Keyboard Colors
+#+begin_src conf
+  exec_always --no-startup-id g810-led -p $HOME/.config/g810-led/profile
+#+end_src
+** Sync NumLock
+#+begin_src conf
+  exec_always --no-startup-id $HOME/.scripts/sync-numlock
+#+end_src
 ** Wallpaper
 #+begin_src conf
   exec_always --no-startup-id nitrogen --set-zoom-fill --save $HOME/Pictures/dual_wallpapers/gruvbox_astronaut_pink.jpeg
@@ -480,7 +492,7 @@ Set caps lock to escape
 ** Other Applications
 #+begin_src conf
   exec --no-startup-id flameshot
-  exec --no-startup-id webcord
+  exec --no-startup-id discord
   exec --no-startup-id spotify
 #+end_src
 * Plasma compatibility improvements (Disabled)
