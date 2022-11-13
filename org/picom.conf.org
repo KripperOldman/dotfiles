@@ -166,7 +166,7 @@ Avoid drawing shadow on all shaped windows (see also: --detect-rounded-corners)
   "100:class_g *?= 'Kitty'",
   #"80:class_g *?= 'discord'",
   #"80:class_g *?= 'spotify'",
-  "80:class_g *?= 'qbittorrent'",
+  #"80:class_g *?= 'qbittorrent'",
   "100:window_type = 'dock'",
   #"99:name *?= 'sudo'", 
   #"99:name *?= 'Screenshot'", 
