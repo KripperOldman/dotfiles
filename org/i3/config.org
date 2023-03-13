@@ -139,6 +139,11 @@ for_window [title="alsamixer"] floating enable border pixel 1
 #+begin_src conf
   for_window [urgent=latest] focus
 #+end_src
+* Virtual Mic Setup
+** Creating the virtual source
+#+begin_src conf
+    # exec_always $HOME/.scripts/create_virtual_mic
+#+end_src
 * Keybinds
 ** Kill windows
 Kill focused window
@@ -328,15 +333,19 @@ toggle sticky
 ** Rofi
 *** Program launcher
 #+begin_src conf
-  bindsym $mod+d exec --no-startup-id $HOME/.config/polybar/scripts/launcher.sh
+  bindsym $mod+d exec --no-startup-id $HOME/.config/polybar/grayblocks/scripts/launcher.sh
+#+end_src
+*** Bitwarden
+#+begin_src conf
+  bindsym $mod+p exec --no-startup-id bwmenu
 #+end_src
 *** Power Menu
 #+begin_src conf
-  bindsym $mod+Shift+e exec --no-startup-id $HOME/.config/polybar/scripts/powermenu.sh
+  bindsym $mod+Shift+e exec --no-startup-id $HOME/.config/polybar/grayblocks/scripts/powermenu.sh
 #+end_src
 *** Network Menu
 #+begin_src conf
-  bindsym $mod+Shift+n exec --no-startup-id networkmanager_dmenu -theme $HOME/.config/polybar/scripts/rofi/networkmenu.rasi
+  bindsym $mod+Shift+n exec --no-startup-id networkmanager_dmenu -theme $HOME/.config/polybar/grayblocks/scripts/rofi/networkmenu.rasi
 #+end_src
 ** Binding Numlock
 #+begin_src conf
@@ -355,7 +364,7 @@ toggle sticky
 #+end_src
 ** General Applications
 #+begin_src conf
-  bindsym $mod+Return exec --no-startup-id kitty tmux new -A -s main
+  bindsym $mod+Return exec --no-startup-id $HOME/.scripts/default-tmux-session
   bindsym $mod+w exec --no-startup-id firefox-developer-edition
   bindsym $mod+e exec --no-startup-id kitty ranger
   bindsym $mod+Shift+p exec --no-startup-id flameshot gui
@@ -455,7 +464,8 @@ Set caps lock to escape
 #+end_src
 ** Keyboard Colors
 #+begin_src conf
-  exec_always --no-startup-id g810-led -p $HOME/.config/g810-led/profile
+  # Moved config to /etc/g810-led/profile so it loads via udev rules
+  exec_always --no-startup-id g810-led -p /etc/g810-led/profile
 #+end_src
 ** Sync NumLock
 #+begin_src conf
@@ -463,8 +473,7 @@ Set caps lock to escape
 #+end_src
 ** Wallpaper
 #+begin_src conf
-  exec_always --no-startup-id nitrogen --set-zoom-fill --save $HOME/Pictures/dual_wallpapers/gruvbox_astronaut_pink.jpeg
-
+  exec_always --no-startup-id nitrogen --restore
   # exec --no-startup-id variety
   # bindsym $mod+XF86AudioNext exec --no-startup-id variety --next
   # bindsym $mod+XF86AudioPrev exec --no-startup-id variety --previous
@@ -474,20 +483,25 @@ Set caps lock to escape
 #+begin_src conf
   exec_always --no-startup-id picom -bc
 #+end_src
+** Settings Daemon
+#+begin_src conf
+  exec_always --no-startup-id xfsettingsd
+#+end_src
 ** Polybar and Applets
 #+begin_src conf
-  exec_always --no-startup-id $HOME/.config/polybar/launch.sh
+  exec_always --no-startup-id $HOME/.config/polybar/grayblocks/launch.sh
   exec --no-startup-id nm-applet
   exec --no-startup-id pa-applet
   exec --no-startup-id blueman-applet
 #+end_src
 ** Audio EQ
 #+begin_src conf
-  exec_always --no-startup-id easyeffects --gapplication-service
+  exec_always --no-startup-id killall easyeffects; easyeffects --gapplication-service
 #+end_src
 ** Startup VPN
 #+begin_src conf
   exec_always --no-startup-id mullvad connect
+  exec_always --no-startup-id killall mullvad-gui; mullvad-vpn
 #+end_src
 ** Other Applications
 #+begin_src conf
@@ -530,13 +544,13 @@ plasma windows setup
 Set inner/outer gaps
 gaps inner|outer current|all set|plus|minus <px>
 #+begin_src conf
-  gaps inner 16
-  gaps outer 18
+  gaps inner 8
+  gaps outer 4
 #+end_src
 Additionally, you can issue commands with the following syntax. This is useful to bind keys to changing the gap size.
 Smart gaps (gaps used if only more than one container on the workspace)
 #+begin_src conf
-  # smart_gaps on
+  smart_gaps off
 #+end_src
 Smart borders (draw borders around container only if it is not the only container on this workspace) 
 on|no_gaps (on=always activate and no_gaps=only activate if the gap size to the edge of the screen is 0)
@@ -548,35 +562,38 @@ on|no_gaps (on=always activate and no_gaps=only activate if the gap size to the 
 ** Border Styles
 Configure border style <normal|1pixel|pixel xx|none|pixel>
 #+begin_src conf
-  new_window pixel 2
-  new_float pixel 2
-  for_window [all] border pixel 2
+  # new_window pixel 2
+  # new_float pixel 2
+  # for_window [all] border pixel 2
+  new_window none
+  new_float none
+  for_window [all] border none
 #+end_src
 Hide borders
 #+begin_src conf
   hide_edge_borders none
 #+end_src
 ** Colorscheme
-Gruvbox colorscheme 
+Tokyo Night colorscheme 
 | class                   | border  | bground | text    | indicator | child_border |
 |-------------------------+---------+---------+---------+-----------+--------------|
-| client.focused          | #d65d0e | #d65d0e | #fbf1c7 | #b16286   | #7c6f64      |
-| client.focused_inactive | #d65d0e | #d65d0e | #fbf1c7 | #504945   | #504945      |
-| client.unfocused        | #3c3836 | #3c3836 | #ebdbb2 | #3c3836   | #3c3836      |
-| client.urgent           | #cc241d | #cc241d | #ebdbb2 | #cc241d   | #cc241d      |
-| client.placeholder      | #282828 | #282828 | #ebdbb2 | #282828   | #282828      |
-| client.background       | #282828 |         |         |           |              |
+| client.focused          | #24283b | #24283b | #c0caf5 | #414868   | #24283b      |
+| client.focused_inactive | #24283b | #24283b | #c0caf5 | #24283b   | #24283b      |
+| client.unfocused        | #1a1b26 | #1a1b26 | #c0caf5 | #1a1b26   | #1a1b26      |
+| client.urgent           | #f7768e | #f7768e | #c0caf5 | #f7768e   | #f7768e      |
+| client.placeholder      | #1a1b26 | #1a1b26 | #c0caf5 | #1a1b26   | #1a1b26      |
+| client.background       | #1a1b26 |         |         |           |              |
 
 #+begin_src conf
-  client.focused          #d65d0e #d65d0e #fbf1c7 #b16286   #7c6f64
-  client.focused_inactive #d65d0e #d65d0e #fbf1c7 #504945   #504945
-  client.unfocused        #3c3836 #3c3836 #ebdbb2 #3c3836   #3c3836
-  client.urgent           #cc241d #cc241d #ebdbb2 #cc241d   #cc241d
-  client.placeholder      #282828 #282828 #ebdbb2 #282828   #282828
-  client.background       #282828
+  client.focused           #24283b  #24283b  #c0caf5  #414868  #24283b      
+  client.focused_inactive  #24283b  #24283b  #c0caf5  #24283b  #24283b      
+  client.unfocused         #1a1b26  #1a1b26  #c0caf5  #1a1b26  #1a1b26      
+  client.urgent            #f7768e  #f7768e  #c0caf5  #f7768e  #f7768e      
+  client.placeholder       #1a1b26  #1a1b26  #c0caf5  #1a1b26  #1a1b26      
+  client.background        #1a1b26                                            
 #+end_src
 ** Font Styles
 #+begin_src conf
-  font pango:Quicksand Medium, Montserrat 12
+  font pango:Quicksand Medium, Montserrat 14
   title_align center
 #+end_src

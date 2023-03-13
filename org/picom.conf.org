@@ -85,7 +85,9 @@ This list includes all the affected apps I found in my testing. The "! name~=''"
   "name *= 'picom'",
   "name *= 'Chromium'",
   "name *= 'Chrome'",
+  "name *= 'Ubisoft'",
   "class_g = 'Firefox' && argb",
+  "name ?= 'Firefox' && window_type = 'utility'",
   "class_g = 'Conky'",
   "class_g = 'Kupfer'",
   "class_g = 'Synapse'",
@@ -107,10 +109,24 @@ Avoid drawing shadow on all shaped windows (see also: --detect-rounded-corners)
 #+begin_src conf
   shadow-ignore-shaped = false;
 #+end_src
+* Borders
+** Rounded Corners
+  Add rounded corners to everything except polybar
+#+begin_src conf
+  corner-radius = 5;
+  rounded-corners-exclude = [
+    "class_g = 'Polybar'"
+  ];
+
+  round-borders = 1;
+  round-borders-rule = [
+   # "5:window_type      = 'normal'",
+  ];
+#+end_src
 * Opacity
 ** Basic Config
 #+begin_src conf
-  inactive-opacity = 1;
+  inactive-opacity = 0.93;
   active-opacity = 1;
   frame-opacity = 1;
   inactive-opacity-override = false;
@@ -122,22 +138,25 @@ Avoid drawing shadow on all shaped windows (see also: --detect-rounded-corners)
 #+end_src
 ** Blur
 #+begin_src conf
-  blur-background = false;
-  # Blur background of opaque windows with transparent frames as well.
-  blur-background-frame = true;
-  # Do not let blur radius adjust based on window opacity.
-  blur-background-fixed = false;
-  blur:
-  {
-  method = "dual_kawase";
-  strength = 12;
-  };
-  blur-background-exclude = [
-  "(_NET_WM_WINDOW_TYPE@:a *= 'MENU' || _NET_WM_WINDOW_TYPE@:a *= 'COMBO')",
-  "window_type = 'dock'",
-  "class_g = 'Peek'", 
-  "window_type = 'desktop'"
-  ];
+    blur-background = false;
+    # Blur background of opaque windows with transparent frames as well.
+    blur-background-frame = false;
+    # Do not let blur radius adjust based on window opacity.
+    blur-background-fixed = false;
+    blur:
+    {
+    method = "dual_kawase";
+    strength = 3;
+    };
+    blur-background-exclude = [
+    "(_NET_WM_WINDOW_TYPE@:a *= 'MENU' || _NET_WM_WINDOW_TYPE@:a *= 'COMBO')",
+    "window_type = 'dock'",
+    "class_g = 'Peek'", 
+    "name *= 'Ubisoft'",
+    "class_g = 'Firefox' && argb",
+    "name ?= 'Firefox' && window_type = 'utility'",
+    "window_type = 'desktop'"
+    ];
 #+end_src
 ** Opacity rules
 #+begin_src conf
@@ -149,7 +168,7 @@ Avoid drawing shadow on all shaped windows (see also: --detect-rounded-corners)
   #"99:class_g = 'Darktable'", 
   #"50:class_g = 'Dmenu'", 
   #"99:name *?= 'Event'", 
-  #"99:class_g = 'firefox'", 
+  "100:class_g = 'firefox'", 
   #"99:class_g = 'GIMP'", 
   #"99:name *?= 'Image'",
   #"99:class_g = 'Lazpaint'", 
@@ -163,7 +182,7 @@ Avoid drawing shadow on all shaped windows (see also: --detect-rounded-corners)
   #"99:class_g = 'Pinta'", 
   #"90:name *?= 'Restart'", 
   #"50:class_g *?= 'Rofi'",
-  "100:class_g *?= 'Kitty'",
+  #"100:class_g *?= 'Kitty'",
   #"80:class_g *?= 'discord'",
   #"80:class_g *?= 'spotify'",
   #"80:class_g *?= 'qbittorrent'",
@@ -181,16 +200,10 @@ Avoid drawing shadow on all shaped windows (see also: --detect-rounded-corners)
 #+end_src
 * Fading
 #+begin_src conf
-  # Fade windows during opacity changes.
-  fading = false;
-  # The time between steps in a fade in milliseconds. (default 10).
-  fade-delta = 1;
-  # Opacity change between steps while fading in. (default 0.028).
-  fade-in-step = 0.03;
-  # Opacity change between steps while fading out. (default 0.03).
-  fade-out-step = 0.03;
-  # Fade windows in/out when opening/closing
-  #no-fading-openclose = true;
+  # make stuff fade in and out
+  fading = true;
+  fade-in-step = 0.2;
+  fade-out-step = 0.2;
 
   # Specify a list of conditions of windows that should not be faded.
   fade-exclude = [ ];

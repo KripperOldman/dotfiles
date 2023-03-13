@@ -20,7 +20,7 @@ config/:
 link: tangle backup
 	$(MAKE) $(user_config_files)
 $(user_config_dir)/%: config/%
-	mkdir -p `dirname $@` && ln -s $(abspath $^) $(abspath $@) 
+	mkdir -p `dirname $@` && ln -s $(abspath $^) $(abspath $@)
 
 clean:
 	rm -rf config $(backup_dir)

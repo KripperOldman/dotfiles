@@ -116,6 +116,10 @@ for_window [title="alsamixer"] floating enable border pixel 1
 
 for_window [urgent=latest] focus
 
+# Creating the virtual source
+
+# exec_always $HOME/.scripts/create_virtual_mic
+
 # Kill windows
 # Kill focused window
 
@@ -314,15 +318,19 @@ bindsym $mod+Shift+s sticky toggle
 
 # Program launcher
 
-bindsym $mod+d exec --no-startup-id $HOME/.config/polybar/scripts/launcher.sh
+bindsym $mod+d exec --no-startup-id $HOME/.config/polybar/grayblocks/scripts/launcher.sh
+
+# Bitwarden
+
+bindsym $mod+p exec --no-startup-id bwmenu
 
 # Power Menu
 
-bindsym $mod+Shift+e exec --no-startup-id $HOME/.config/polybar/scripts/powermenu.sh
+bindsym $mod+Shift+e exec --no-startup-id $HOME/.config/polybar/grayblocks/scripts/powermenu.sh
 
 # Network Menu
 
-bindsym $mod+Shift+n exec --no-startup-id networkmanager_dmenu -theme $HOME/.config/polybar/scripts/rofi/networkmenu.rasi
+bindsym $mod+Shift+n exec --no-startup-id networkmanager_dmenu -theme $HOME/.config/polybar/grayblocks/scripts/rofi/networkmenu.rasi
 
 # Binding Numlock
 
@@ -341,7 +349,7 @@ bindsym XF86AudioRaiseVolume exec --no-startup-id $HOME/.scripts/volume up
 
 # General Applications
 
-bindsym $mod+Return exec --no-startup-id kitty tmux new -A -s main
+bindsym $mod+Return exec --no-startup-id $HOME/.scripts/default-tmux-session
 bindsym $mod+w exec --no-startup-id firefox-developer-edition
 bindsym $mod+e exec --no-startup-id kitty ranger
 bindsym $mod+Shift+p exec --no-startup-id flameshot gui
@@ -439,7 +447,8 @@ exec_always --no-startup-id setxkbmap -layout us -option caps:escape
 
 # Keyboard Colors
 
-exec_always --no-startup-id g810-led -p $HOME/.config/g810-led/profile
+# Moved config to /etc/g810-led/profile so it loads via udev rules
+exec_always --no-startup-id g810-led -p /etc/g810-led/profile
 
 # Sync NumLock
 
@@ -447,8 +456,7 @@ exec_always --no-startup-id $HOME/.scripts/sync-numlock
 
 # Wallpaper
 
-exec_always --no-startup-id nitrogen --set-zoom-fill --save $HOME/Pictures/dual_wallpapers/gruvbox_astronaut_pink.jpeg
-
+exec_always --no-startup-id nitrogen --restore
 # exec --no-startup-id variety
 # bindsym $mod+XF86AudioNext exec --no-startup-id variety --next
 # bindsym $mod+XF86AudioPrev exec --no-startup-id variety --previous
@@ -458,20 +466,25 @@ exec_always --no-startup-id nitrogen --set-zoom-fill --save $HOME/Pictures/dual_
 
 exec_always --no-startup-id picom -bc
 
+# Settings Daemon
+
+exec_always --no-startup-id xfsettingsd
+
 # Polybar and Applets
 
-exec_always --no-startup-id $HOME/.config/polybar/launch.sh
+exec_always --no-startup-id $HOME/.config/polybar/grayblocks/launch.sh
 exec --no-startup-id nm-applet
 exec --no-startup-id pa-applet
 exec --no-startup-id blueman-applet
 
 # Audio EQ
 
-exec_always --no-startup-id easyeffects --gapplication-service
+exec_always --no-startup-id killall easyeffects; easyeffects --gapplication-service
 
 # Startup VPN
 
 exec_always --no-startup-id mullvad connect
+exec_always --no-startup-id killall mullvad-gui; mullvad-vpn
 
 # Other Applications
 
@@ -483,14 +496,14 @@ exec --no-startup-id spotify
 # Set inner/outer gaps
 # gaps inner|outer current|all set|plus|minus <px>
 
-gaps inner 16
-gaps outer 18
+gaps inner 8
+gaps outer 4
 
 
 # Additionally, you can issue commands with the following syntax. This is useful to bind keys to changing the gap size.
 # Smart gaps (gaps used if only more than one container on the workspace)
 
-# smart_gaps on
+smart_gaps off
 
 
 # Smart borders (draw borders around container only if it is not the only container on this workspace) 
@@ -501,9 +514,12 @@ smart_borders no_gaps
 # Border Styles
 # Configure border style <normal|1pixel|pixel xx|none|pixel>
 
-new_window pixel 2
-new_float pixel 2
-for_window [all] border pixel 2
+# new_window pixel 2
+# new_float pixel 2
+# for_window [all] border pixel 2
+new_window none
+new_float none
+for_window [all] border none
 
 
 # Hide borders
@@ -511,25 +527,25 @@ for_window [all] border pixel 2
 hide_edge_borders none
 
 # Colorscheme
-# Gruvbox colorscheme 
+# Tokyo Night colorscheme 
 # | class                   | border  | bground | text    | indicator | child_border |
 # |-------------------------+---------+---------+---------+-----------+--------------|
-# | client.focused          | #d65d0e | #d65d0e | #fbf1c7 | #b16286   | #7c6f64      |
-# | client.focused_inactive | #d65d0e | #d65d0e | #fbf1c7 | #504945   | #504945      |
-# | client.unfocused        | #3c3836 | #3c3836 | #ebdbb2 | #3c3836   | #3c3836      |
-# | client.urgent           | #cc241d | #cc241d | #ebdbb2 | #cc241d   | #cc241d      |
-# | client.placeholder      | #282828 | #282828 | #ebdbb2 | #282828   | #282828      |
-# | client.background       | #282828 |         |         |           |              |
+# | client.focused          | #24283b | #24283b | #c0caf5 | #414868   | #24283b      |
+# | client.focused_inactive | #24283b | #24283b | #c0caf5 | #24283b   | #24283b      |
+# | client.unfocused        | #1a1b26 | #1a1b26 | #c0caf5 | #1a1b26   | #1a1b26      |
+# | client.urgent           | #f7768e | #f7768e | #c0caf5 | #f7768e   | #f7768e      |
+# | client.placeholder      | #1a1b26 | #1a1b26 | #c0caf5 | #1a1b26   | #1a1b26      |
+# | client.background       | #1a1b26 |         |         |           |              |
 
 
-client.focused          #d65d0e #d65d0e #fbf1c7 #b16286   #7c6f64
-client.focused_inactive #d65d0e #d65d0e #fbf1c7 #504945   #504945
-client.unfocused        #3c3836 #3c3836 #ebdbb2 #3c3836   #3c3836
-client.urgent           #cc241d #cc241d #ebdbb2 #cc241d   #cc241d
-client.placeholder      #282828 #282828 #ebdbb2 #282828   #282828
-client.background       #282828
+client.focused           #24283b  #24283b  #c0caf5  #414868  #24283b      
+client.focused_inactive  #24283b  #24283b  #c0caf5  #24283b  #24283b      
+client.unfocused         #1a1b26  #1a1b26  #c0caf5  #1a1b26  #1a1b26      
+client.urgent            #f7768e  #f7768e  #c0caf5  #f7768e  #f7768e      
+client.placeholder       #1a1b26  #1a1b26  #c0caf5  #1a1b26  #1a1b26      
+client.background        #1a1b26
 
 # Font Styles
 
-font pango:Quicksand Medium, Montserrat 12
+font pango:Quicksand Medium, Montserrat 14
 title_align center
