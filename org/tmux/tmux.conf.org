@@ -6,6 +6,14 @@
   set -g prefix C-a
   unbind C-b
 #+end_src
+* Change Status Bar
+#+begin_src conf
+  set -g base-index 1
+#+end_src
+* Set true color support
+#+begin_src conf
+  set-option -sa terminal-features ',xterm-kitty:RGB'
+#+end_src
 * Add Mouse Support
 #+begin_src conf
   set -g mouse on
@@ -24,9 +32,16 @@ Other examples:
 #+begin_src conf
   set -g @plugin 'tmux-plugins/tpm'
 #+end_src
-** Tokyo Night
+** Catppuccin Theme
 #+begin_src conf
-  set -g @plugin "sigugo/tokyo-night-tmux"
+  set -g @plugin 'catppuccin/tmux'
+  set -g @catppuccin-flavour 'machhiato'
+  set -g @catppuccin_powerline_icons_theme_enabled on
+  set -g @catppuccin_l_left_separator ""
+  set -g @catppuccin_l_right_separator ""
+  set -g @catppuccin_r_left_separator ""
+  set -g @catppuccin_r_right_separator ""
+  # set -g @plugin "sigugo/tokyo-night-tmux"
   # set -g @plugin 'egel/tmux-gruvbox'
   # set -g @tmux-gruvbox 'dark' # or 'light'
   #+end_src

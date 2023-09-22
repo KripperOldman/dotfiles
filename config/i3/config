@@ -82,6 +82,10 @@ assign [class="discord"] $wsv6
 
 for_window [class="Spotify"] move to workspace $wsv6
 
+# KDE Connect presentation mode
+
+for_window [class="kdeconnect.daemon"] fullscreen disable; floating enable; resize set width 3000 height 1920; move absolute position center
+
 # Open Specific Applications in Floating Mode
 
 for_window [title="alsamixer"] floating enable border pixel 1
@@ -503,7 +507,7 @@ gaps outer 4
 # Additionally, you can issue commands with the following syntax. This is useful to bind keys to changing the gap size.
 # Smart gaps (gaps used if only more than one container on the workspace)
 
-smart_gaps off
+smart_gaps on
 
 
 # Smart borders (draw borders around container only if it is not the only container on this workspace) 

@@ -99,11 +99,17 @@ set $ws1 1:mail
 #+begin_src conf
   assign [class="discord"] $wsv6
   #assign [class="firefox"] $ws2
+          
 #+end_src
 *** Because Spotify is Weird for Whatever Reason
 #+begin_src conf
   for_window [class="Spotify"] move to workspace $wsv6
 #+end_src
+*** KDE Connect presentation mode
+#+begin_src conf
+  for_window [class="kdeconnect.daemon"] fullscreen disable; floating enable; resize set width 3000 height 1920; move absolute position center
+#+end_src
+
 
 ** Open Specific Applications in Floating Mode
 #+begin_src conf
@@ -550,7 +556,7 @@ gaps inner|outer current|all set|plus|minus <px>
 Additionally, you can issue commands with the following syntax. This is useful to bind keys to changing the gap size.
 Smart gaps (gaps used if only more than one container on the workspace)
 #+begin_src conf
-  smart_gaps off
+  smart_gaps on
 #+end_src
 Smart borders (draw borders around container only if it is not the only container on this workspace) 
 on|no_gaps (on=always activate and no_gaps=only activate if the gap size to the edge of the screen is 0)
