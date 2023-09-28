@@ -1,4 +1,4 @@
-# Mod Keys
+
 # Set mod key (Mod1=<Alt>, Mod4=<Super>)
 
 
@@ -12,8 +12,6 @@ set $modv Mod1
 
 floating_modifier $mod
 
-# Horizontal Monitor
-
 set $wsh1 1:H1
 set $wsh2 2:H2
 set $wsh3 3:H3
@@ -24,8 +22,6 @@ set $wsh7 7:H7
 set $wsh8 8:H8
 set $wsh9 9:H9
 set $wsh10 10:H10
-
-# Vertical Monitor
 
 set $wsv1 1:V1
 set $wsv2 2:V2
@@ -38,16 +34,12 @@ set $wsv8 8:V8
 set $wsv9 9:V9
 set $wsv10 10:V10
 
-# Displays
-
 set $horizontal_screen "HDMI-0"
 set $vertical_screen "DP-1"
 
-# Disable Focus Follows Cursor
-
 focus_follows_mouse no
 
-# Horizontal Monitor
+mouse_warping none
 
 workspace $wsh1 output $horizontal_screen
 workspace $wsh2 output $horizontal_screen
@@ -60,8 +52,6 @@ workspace $wsh8 output $horizontal_screen
 workspace $wsh9 output $horizontal_screen
 workspace $wsh10 output $horizontal_screen
 
-# Vertical Monitor
-
 workspace $wsv1 output $vertical_screen
 workspace $wsv2 output $vertical_screen
 workspace $wsv3 output $vertical_screen
@@ -73,20 +63,12 @@ workspace $wsv8 output $vertical_screen
 workspace $wsv9 output $vertical_screen
 workspace $wsv10 output $vertical_screen
 
-# Open Applications on Specific Workspaces
-
 assign [class="discord"] $wsv6
 #assign [class="firefox"] $ws2
 
-# Because Spotify is Weird for Whatever Reason
-
 for_window [class="Spotify"] move to workspace $wsv6
 
-# KDE Connect presentation mode
-
 for_window [class="kdeconnect.daemon"] fullscreen disable; floating enable; resize set width 3000 height 1920; move absolute position center
-
-# Open Specific Applications in Floating Mode
 
 for_window [title="alsamixer"] floating enable border pixel 1
   for_window [class="calamares"] floating enable border normal
@@ -116,15 +98,11 @@ for_window [title="alsamixer"] floating enable border pixel 1
   for_window [class="Xfburn"] floating enable
   for_window [title="Variety Images"] floating enable
 
-# Switch to Workspace with Urgent Window Automatically
-
 for_window [urgent=latest] focus
-
-# Creating the virtual source
 
 # exec_always $HOME/.scripts/create_virtual_mic
 
-# Kill windows
+
 # Kill focused window
 
 bindsym $mod+Shift+q kill
@@ -135,13 +113,9 @@ bindsym $mod+Shift+q kill
 
 bindsym $mod+Ctrl+x --release exec --no-startup-id xkill
 
-# Change borders
-
 bindsym $mod+u border none
 bindsym $mod+y border pixel 2
 bindsym $mod+n border normal
-
-# Change Focus
 
 bindsym $mod+h focus left
 bindsym $mod+j focus down
@@ -156,7 +130,7 @@ bindsym $mod+Down focus down
 bindsym $mod+Up focus up
 bindsym $mod+Right focus right
 
-# Move Windows
+
 # move focused window
 
 bindsym $mod+Shift+h move left
@@ -201,8 +175,6 @@ bindsym $mod+minus scratchpad show
 bindsym $mod+Ctrl+Right workspace next
 bindsym $mod+Ctrl+Left workspace prev
 
-# Horizontal Monitor
-
 bindsym $mod+1 workspace $wsh1
 bindsym $mod+2 workspace $wsh2
 bindsym $mod+3 workspace $wsh3
@@ -213,8 +185,6 @@ bindsym $mod+7 workspace $wsh7
 bindsym $mod+8 workspace $wsh8
 bindsym $mod+9 workspace $wsh9
 bindsym $mod+0 workspace $wsh10
-
-# Vertical Monitor
 
 bindsym $modv+1 workspace $wsv1
 bindsym $modv+2 workspace $wsv2
@@ -227,7 +197,7 @@ bindsym $modv+8 workspace $wsv8
 bindsym $modv+9 workspace $wsv9
 bindsym $modv+0 workspace $wsv10
 
-# Horizontal Monitor
+
 # Move focused container to workspace
 
 bindsym $mod+Ctrl+1 move container to workspace $wsh1
@@ -255,7 +225,7 @@ bindsym $mod+Shift+8 move container to workspace $wsh8; workspace $wsh8
 bindsym $mod+Shift+9 move container to workspace $wsh9; workspace $wsh9
 bindsym $mod+Shift+0 move container to workspace $wsh10; workspace $wsh10
 
-# Vertical Monitor
+
 # Move focused container to workspace
 
 bindsym $modv+Ctrl+1 move container to workspace $wsv1
@@ -283,12 +253,10 @@ bindsym $modv+Shift+8 move container to workspace $wsv8; workspace $wsv8
 bindsym $modv+Shift+9 move container to workspace $wsv9; workspace $wsv9
 bindsym $modv+Shift+0 move container to workspace $wsv10; workspace $wsv10
 
-# Move Containers between Monitors
-
 bindsym $mod+Ctrl+greater move container to output right
 bindsym $mod+Ctrl+less move container to output left
 
-# Workspace Layout
+
 # split orientation
 
 bindsym $mod+Tab split toggle
@@ -305,7 +273,7 @@ bindsym $mod+s layout stacking
 bindsym $mod+t layout tabbed
 bindsym $mod+q layout toggle split
 
-# Floating
+
 # toggle tiling / floating
 
 bindsym $mod+Shift+space floating toggle
@@ -320,27 +288,15 @@ bindsym $mod+space focus mode_toggle
 
 bindsym $mod+Shift+s sticky toggle
 
-# Program launcher
-
 bindsym $mod+d exec --no-startup-id $HOME/.config/polybar/grayblocks/scripts/launcher.sh
-
-# Bitwarden
 
 bindsym $mod+p exec --no-startup-id bwmenu
 
-# Power Menu
-
 bindsym $mod+Shift+e exec --no-startup-id $HOME/.config/polybar/grayblocks/scripts/powermenu.sh
-
-# Network Menu
 
 bindsym $mod+Shift+n exec --no-startup-id networkmanager_dmenu -theme $HOME/.config/polybar/grayblocks/scripts/rofi/networkmenu.rasi
 
-# Binding Numlock
-
 bindsym --release Num_Lock exec --no-startup-id $HOME/.scripts/sync-numlock
-
-# Binding Media Keys
 
 bindsym XF86AudioNext exec --no-startup-id "playerctl next"
 bindsym XF86AudioPrev exec --no-startup-id "playerctl previous"
@@ -351,27 +307,19 @@ bindsym XF86AudioMute exec --no-startup-id $HOME/.scripts/volume mute
 bindsym XF86AudioLowerVolume exec --no-startup-id $HOME/.scripts/volume down
 bindsym XF86AudioRaiseVolume exec --no-startup-id $HOME/.scripts/volume up
 
-# General Applications
-
 bindsym $mod+Return exec --no-startup-id $HOME/.scripts/default-tmux-session
 bindsym $mod+w exec --no-startup-id firefox-developer-edition
 bindsym $mod+e exec --no-startup-id kitty ranger
 bindsym $mod+Shift+p exec --no-startup-id flameshot gui
 bindsym $mod+c exec --no-startup-id emacsclient -c --alternate-editor=
 
-# Reload the Configuration File
-
 bindsym $mod+Shift+c reload
-
-# Restart i3 Inplace (preserves your layout/session, can be used to upgrade i3)
 
 bindsym $mod+Shift+r restart
 
-# Enter Resize Mode
-
 bindsym $mod+r mode "resize"
 
-# Using Resize Mode
+
 # These bindings trigger as soon as you enter the resize mode
 # Pressing left will shrink the window’s width.
 # Pressing right will grow the window’s width.
@@ -399,17 +347,11 @@ bindsym Return mode "default"
 bindsym Escape mode "default"
 }
 
-# Setup
-
 set $mode_gaps Gaps: (o) outer, (i) inner
 set $mode_gaps_outer Outer Gaps: +|-|0 (local), Shift + +|-|0 (global)
 set $mode_gaps_inner Inner Gaps: +|-|0 (local), Shift + +|-|0 (global)
 
-# Entering Gaps Mode
-
 bindsym $mod+Shift+g mode "$mode_gaps"
-
-# Using Gaps Mode
 
 mode "$mode_gaps" {
 bindsym o      mode "$mode_gaps_outer"
@@ -417,8 +359,6 @@ bindsym i      mode "$mode_gaps_inner"
 bindsym Return mode "default"
 bindsym Escape mode "default"
 }
-
-# Inner Gaps Mode
 
 mode "$mode_gaps_inner" {
 bindsym plus  gaps inner current plus 5
@@ -431,8 +371,6 @@ bindsym Return mode "default"
 bindsym Escape mode "default"
 }
 
-# Outer Gaps Mode
-
 mode "$mode_gaps_outer" {
 bindsym plus  gaps outer current plus 5
 bindsym minus gaps outer current minus 5
@@ -444,21 +382,15 @@ bindsym Return mode "default"
 bindsym Escape mode "default"
 }
 
-# Set Caps Lock to ESC
+
 # Set caps lock to escape
 
 exec_always --no-startup-id setxkbmap -layout us -option caps:escape
 
-# Keyboard Colors
-
 # Moved config to /etc/g810-led/profile so it loads via udev rules
 exec_always --no-startup-id g810-led -p /etc/g810-led/profile
 
-# Sync NumLock
-
 exec_always --no-startup-id $HOME/.scripts/sync-numlock
-
-# Wallpaper
 
 exec_always --no-startup-id nitrogen --restore
 # exec --no-startup-id variety
@@ -466,37 +398,25 @@ exec_always --no-startup-id nitrogen --restore
 # bindsym $mod+XF86AudioPrev exec --no-startup-id variety --previous
 # bindsym $mod+XF86AudioPlay exec --no-startup-id variety --toggle-pause
 
-# Picom
-
 exec_always --no-startup-id picom -bc
 
-# Settings Daemon
-
 exec_always --no-startup-id xfsettingsd
-
-# Polybar and Applets
 
 exec_always --no-startup-id $HOME/.config/polybar/grayblocks/launch.sh
 exec --no-startup-id nm-applet
 exec --no-startup-id pa-applet
 exec --no-startup-id blueman-applet
 
-# Audio EQ
-
 exec_always --no-startup-id killall easyeffects; easyeffects --gapplication-service
-
-# Startup VPN
 
 exec_always --no-startup-id mullvad connect
 exec_always --no-startup-id killall mullvad-gui; mullvad-vpn
-
-# Other Applications
 
 exec --no-startup-id flameshot
 exec --no-startup-id discord
 exec --no-startup-id spotify
 
-# Gaps
+
 # Set inner/outer gaps
 # gaps inner|outer current|all set|plus|minus <px>
 
@@ -515,7 +435,7 @@ smart_gaps on
 
 smart_borders no_gaps
 
-# Border Styles
+
 # Configure border style <normal|1pixel|pixel xx|none|pixel>
 
 # new_window pixel 2
@@ -530,7 +450,7 @@ for_window [all] border none
 
 hide_edge_borders none
 
-# Colorscheme
+
 # Tokyo Night colorscheme 
 # | class                   | border  | bground | text    | indicator | child_border |
 # |-------------------------+---------+---------+---------+-----------+--------------|
@@ -548,8 +468,6 @@ client.unfocused         #1a1b26  #1a1b26  #c0caf5  #1a1b26  #1a1b26
 client.urgent            #f7768e  #f7768e  #c0caf5  #f7768e  #f7768e      
 client.placeholder       #1a1b26  #1a1b26  #c0caf5  #1a1b26  #1a1b26      
 client.background        #1a1b26
-
-# Font Styles
 
 font pango:Quicksand Medium, Montserrat 14
 title_align center

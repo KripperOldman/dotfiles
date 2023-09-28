@@ -65,6 +65,10 @@ set $ws1 1:mail
 #+begin_src conf
   focus_follows_mouse no
 #+end_src
+** Disable Mouse Warping
+#+begin_src conf
+  mouse_warping none
+#+end_src
 * Workspace Setup
 ** Bind workspaces to monitors
 *** Horizontal Monitor
